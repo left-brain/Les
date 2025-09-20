@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Les — Minimal Music Player</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="text-gray-900 min-h-screen flex items-center justify-center p-6">
+
+<!-- background gradient layers -->
+<div id="gradient-bg"></div>
+<div id="gradient-bg-next"></div>
+
+  <main class="w-full max-w-md space-y-6">
+    <header class="text-center">
+      <h1 class="text-3xl font-light tracking-wide">Les</h1>
+      <p class="text-xs text-gray-400 mt-1">minimal music player</p>
+    </header>
+
+    <!-- upload -->
+    <div class="flex flex-col space-y-2">
+      <label class="text-sm">Add tracks / album</label>
+      <input id="fileUpload" type="file" multiple accept="audio/*" class="text-sm" />
+
+      <label class="flex items-center space-x-2 text-xs text-gray-600 mt-1">
+        <input id="replacePlaylist" type="checkbox" class="rounded border-gray-300">
+        <span>Replace existing playlist</span>
+      </label>
+
+      <p id="lib-warning" class="hidden mt-1 text-xs text-amber-600">
+        Metadata library not loaded — showing filename only.
+      </p>
+    </div>
+
+    <!-- artwork -->
+    <div class="w-48 h-48 mx-auto rounded-2xl overflow-hidden bg-gray-100 flex items-center justify-center ring-1 ring-gray-200">
+      <img id="cover" alt="" class="hidden w-full h-full object-cover">
+      <span id="cover-ph" class="text-gray-400 text-xs">No Artwork</span>
+    </div>
+
+    <!-- metadata -->
+    <div class="text-center">
+      <div id="title" class="text-lg font-medium truncate">No track loaded</div>
+      <div id="artist" class="text-sm text-gray-500 truncate"></div>
+      <div id="track-count" class="text-xs text-gray-400 mt-1"></div>
+    </div>
+    
+    <!-- controls -->
+    <div class="flex items-center justify-center gap-2">
+      <button id="shuffleBtn" title="Shuffle playlist" class="px-3 py-2 rounded-full bg-gray-900 text-white text-sm">
+        🔀
+      </button>
+      
+      <button id="prev" class="px-4 py-2 rounded-full bg-gray-900 text-white text-sm">⏮</button>
+      <button id="play" class="px-5 py-2 rounded-full bg-gray-900 text-white text-sm">Play</button>
+      <button id="next" class="px-4 py-2 rounded-full bg-gray-900 text-white text-sm">⏭</button>
+
+      <button id="removeTrack" title="Remove current track" class="px-3 py-2 rounded-full bg-gray-900 text-white text-sm" style="display: none;">
+        🗑️
+      </button>
+    </div>
+    <!-- timeline -->
+    <div class="flex items-center gap-3">
+      <span id="cur" class="w-10 text-xs tabular-nums text-gray-500 text-right">0:00</span>
+      <input id="seek" type="range" min="0" max="100" value="0" class="flex-1" />
+      <span id="dur" class="w-10 text-xs tabular-nums text-gray-500">0:00</span>
+    </div>
+
+    <!-- upcoming list -->
+    <div class="mt-6">
+      <div class="text-sm mb-2 text-gray-500">Upcoming</div>
+      <div class="upcoming-viewport">
+        <div id="upcomingList" class="upcoming-list"></div>
+      </div>
+        <div id="noUpcomingMessage" class="hidden text-center text-xs text-gray-500 mt-2">
+          None!
+        </div>
+    </div>
+    <audio id="audio" class="hidden"></audio>
+    <audio id="audio-next" class="hidden"></audio>
+  </main>
+
+  <!-- jsmediatags local -->
+  <script src="./libs/jsmediatags.min.js"></script>
+  <script src="./player.js"></script>
+  <footer class="fixed bottom-0 left-0 right-0 p-4 text-center text-xs text-gray-500">
+    © 2025 made by tjesse kitchingham with love :p
+  </footer>
+
+</body>
+</html>
